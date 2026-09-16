@@ -1,0 +1,92 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2026-08-09T22:25:41-04:00",
+    "name": "AIO",
+    "author": "ari@alfari.id",
+    "description": "Alfari All-In-One Egg",
+    "features": [],
+    "docker_images": {
+        "ghcr.io/kikaku-co-id/aio:latest": "ghcr.io/kikaku-co-id/aio:latest"
+    },
+    "file_denylist": [],
+    "startup": "{{STARTUP_CMD}}",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"======================================== SERVER MARKED AS RUNNING ========================================\"\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": null,
+            "container": "alpine:3.4",
+            "entrypoint": "ash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Startup Command",
+            "description": "The startup command for your server to use.",
+            "env_variable": "STARTUP_CMD",
+            "default_value": "bash",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required",
+            "field_type": "text"
+        },
+        {
+            "name": "Git Repository URL",
+            "description": "URL of the git repository used for auto clone/pull. Leave empty to disable.",
+            "env_variable": "GIT_REPO_URL",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Automatic Update",
+            "description": "true = automatically git pull new commits and restart, false = disabled.",
+            "env_variable": "AUTO_PULL",
+            "default_value": "true",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Install Branch",
+            "description": "Git branch that gets cloned and monitored.",
+            "env_variable": "INSTALL_BRANCH",
+            "default_value": "main",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Git Access Token",
+            "description": "Access token for private repositories. Used live for authentication, never stored on disk.",
+            "env_variable": "GIT_ACCESS_TOKEN",
+            "default_value": "",
+            "user_viewable": false,
+            "user_editable": true,
+            "rules": "nullable|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Check Interval",
+            "description": "How often to check for new commits, in seconds (e.g. 30 = every 30 seconds, 300 = 5 minutes). Minimum 5.",
+            "env_variable": "CHECK_INTERVAL",
+            "default_value": "30",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string",
+            "field_type": "text"
+        }
+    ]
+}

@@ -1,0 +1,77 @@
+{
+  "_comment": "Pterodactyl SQL Server 2022 Egg",
+  "meta": {
+    "version": "PTDL_v2",
+    "update_url": null
+  },
+  "exported_at": "2026-08-23T00:00:00+07:00",
+  "name": "SQL Server 2022",
+  "author": "ari@alfari.id",
+  "description": "Microsoft SQL Server 2022 (Developer Edition) on Linux, dijalankan sebagai instance per-server via image Docker kustom. Data persisten di folder server.",
+  "features": null,
+  "docker_images": {
+    "ghcr.io/kikaku-co-id/sqlserver2022:latest": "ghcr.io/kikaku-co-id/sqlserver2022:latest"
+  },
+  "file_denylist": [],
+  "startup": "/entrypoint.sh",
+  "config": {
+    "files": "{}",
+    "startup": "{\r\n    \"done\": \"SQL Server is now ready for client connections\"\r\n}",
+    "logs": "{}",
+    "stop": "^C"
+  },
+  "scripts": {
+    "installation": {
+      "script": "#!\/bin\/ash\r\nmkdir -p \/home\/container\/mssql-data\r\nchown -R container:0 \/home\/container\/mssql-data\r\nexit 0",
+      "container": "alpine:latest",
+      "entrypoint": "ash"
+    }
+  },
+  "variables": [
+    {
+      "name": "Accept EULA",
+      "description": "Menerima lisensi EULA SQL Server. Wajib Y.",
+      "env_variable": "ACCEPT_EULA",
+      "default_value": "Y",
+      "user_viewable": true,
+      "user_editable": false,
+      "rules": "required|string|in:Y,y"
+    },
+    {
+      "name": "SA Password",
+      "description": "Password akun sa. Minimal 8 karakter & memuat 3 dari 4 kelas karakter (huruf besar, huruf kecil, angka, simbol). JANGAN pakai karakter yang butuh escaping shell.",
+      "env_variable": "MSSQL_SA_PASSWORD",
+      "default_value": "",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": "required|string"
+    },
+    {
+      "name": "Edition (PID)",
+      "description": "Edisi SQL Server / product key. Developer & Express gratis.",
+      "env_variable": "MSSQL_PID",
+      "default_value": "Developer",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": "required|string|in:Developer,Express,Evaluation,Web,Standard,Enterprise"
+    },
+    {
+      "name": "SQL Server Memory Limit (MB)",
+      "description": "Batas memori yang boleh dipakai SQL Server (MB). Kosongkan untuk auto = 90% dari memori alokasi server.",
+      "env_variable": "MSSQL_MEMORY_LIMIT_MB",
+      "default_value": "",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": "nullable|numeric|min:2048|max:262144"
+    },
+    {
+      "name": "TCP Port",
+      "description": "Port listener SQL Server. WAJIB mengikuti port yang di-assign Pterodactyl ({{SERVER_PORT}}) biar bisa diakses dari luar.",
+      "env_variable": "MSSQL_TCP_PORT",
+      "default_value": "{{SERVER_PORT}}",
+      "user_viewable": true,
+      "user_editable": false,
+      "rules": "required|string"
+    }
+  ]
+}
