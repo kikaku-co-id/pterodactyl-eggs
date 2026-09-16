@@ -13,6 +13,7 @@ A collection of Pterodactyl eggs with Docker images built automatically and host
 | Egg | Category | Image | Short Description |
 |-----|----------|-------|-------------------|
 | [AIO](./Application/egg-a-i-o.json) | Application | `ghcr.io/kikaku-co-id/aio:latest` | All-in-One environment with Node.js, Java, Python, Go, and Git auto-pull. |
+| [n8n](./Automation/n8n.json) | Automation | `ghcr.io/kikaku-co-id/n8n-automation:latest` | Workflow automation platform. Runs n8n with Pterodactyl-friendly config. |
 | [SQL Server 2022](./Database/mssql.json) | Database | `ghcr.io/kikaku-co-id/sqlserver2022:latest` | Microsoft SQL Server 2022 on Linux, persistent data in the server folder. |
 
 ## Startup Setup
@@ -51,6 +52,19 @@ Fill the **Startup Command** based on your application needs:
 | `Check Interval` | `30` | Update check interval in seconds. **Minimum 5 seconds.** |
 
 > Note: if `Startup Command` is set to `bash`, auto-restart on update will not work. Use the application command directly if you want auto-update to stay active.
+
+### n8n
+
+Leave the Startup Command as default (`/entrypoint.sh`). Just fill in the variables below:
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `N8N_ENCRYPTION_KEY` | *(empty)* | Encryption key for sensitive data. Set once and keep it secret. |
+| `N8N_SECURE_COOKIE` | `false` | Set to `true` if you use HTTPS. |
+| `N8N_PROTOCOL` | `http` | Protocol for webhooks: `http` or `https`. |
+| `WEBHOOK_URL` | *(empty)* | Public webhook URL (optional). |
+
+Access n8n via the server's allocated port after it starts.
 
 ### SQL Server 2022
 
