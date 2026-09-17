@@ -1,0 +1,41 @@
+{
+  "_comment": "Pterodactyl Komari Egg",
+  "meta": {
+    "version": "PTDL_v2",
+    "update_url": null
+  },
+  "exported_at": "2026-09-17T00:00:00+07:00",
+  "name": "Komari",
+  "author": "ari@alfari.id",
+  "description": "Komari is a lightweight, self-hosted server monitoring solution with a web dashboard and agent-based metrics. This egg runs the Komari server panel using a custom Docker image.",
+  "features": null,
+  "docker_images": {
+    "ghcr.io/kikaku-co-id/komari:latest": "ghcr.io/kikaku-co-id/komari:latest"
+  },
+  "file_denylist": [],
+  "startup": "/entrypoint.sh",
+  "config": {
+    "files": "{}",
+    "startup": "{\r\n    \"done\": \"Starting server on\"\r\n}",
+    "logs": "{}",
+    "stop": "^C"
+  },
+  "scripts": {
+    "installation": {
+      "script": "#!\/bin\/ash\r\nmkdir -p \/home\/container\/data\r\nchmod 750 \/home\/container\/data\r\nexit 0",
+      "container": "alpine:latest",
+      "entrypoint": "ash"
+    }
+  },
+  "variables": [
+    {
+      "name": "Gin Mode",
+      "description": "Gin web framework run mode. Consisten dengan image bawaan Komari (release).",
+      "env_variable": "GIN_MODE",
+      "default_value": "release",
+      "user_viewable": true,
+      "user_editable": true,
+      "rules": "required|string|in:release,debug,test"
+    }
+  ]
+}

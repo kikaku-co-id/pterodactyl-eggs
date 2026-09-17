@@ -13,6 +13,7 @@ A collection of Pterodactyl eggs with Docker images built automatically and host
 | Egg | Category | Image | Short Description |
 |-----|----------|-------|-------------------|
 | [AIO](./Application/egg-a-i-o.json) | Application | `ghcr.io/kikaku-co-id/aio:latest` | All-in-One environment with Node.js, Java, Python, Go, and Git auto-pull. |
+| [Komari](./Application/komari.json) | Application | `ghcr.io/kikaku-co-id/komari:latest` | Self-hosted server monitoring panel with web dashboard and agent-based metrics. See [komari.wiki](https://www.komari.wiki/en/). |
 | [n8n](./Automation/n8n.json) | Automation | `ghcr.io/kikaku-co-id/n8n-automation:latest` | Workflow automation platform. Runs n8n with Pterodactyl-friendly config. |
 | [SQL Server 2022](./Database/mssql.json) | Database | `ghcr.io/kikaku-co-id/sqlserver2022:latest` | Microsoft SQL Server 2022 on Linux, persistent data in the server folder. |
 
@@ -52,6 +53,16 @@ Fill the **Startup Command** based on your application needs:
 | `Check Interval` | `30` | Update check interval in seconds. **Minimum 5 seconds.** |
 
 > Note: if `Startup Command` is set to `bash`, auto-restart on update will not work. Use the application command directly if you want auto-update to stay active.
+
+### Komari
+
+Leave the Startup Command as default (`/entrypoint.sh`). The Komari server listens on the port assigned by Pterodactyl. On first access, follow the installation guide to create the admin account.
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `Gin Mode` | `release` | Gin web framework run mode: `release`, `debug`, or `test`. |
+
+Access the panel via `http://<node-ip>:<assigned-port>` after it starts. Official docs: [https://www.komari.wiki/en/](https://www.komari.wiki/en/)
 
 ### n8n
 
