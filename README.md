@@ -56,7 +56,7 @@ Fill the **Startup Command** based on your application needs:
 
 ### Komari
 
-Leave the Startup Command as default (`/entrypoint.sh`). The Komari server listens on the port assigned by Pterodactyl. On first access, follow the installation guide to create the admin account.
+The Komari server listens on the port assigned by Pterodactyl. On first access, follow the installation guide to create the admin account.
 
 | Variable | Default | Description |
 |----------|---------|-------------|
@@ -66,7 +66,7 @@ Access the panel via `http://<node-ip>:<assigned-port>` after it starts. Officia
 
 ### n8n
 
-Leave the Startup Command as default (`/entrypoint.sh`). Just fill in the variables below:
+Just fill in the variables below:
 
 | Variable | Default | Description |
 |----------|---------|-------------|
@@ -79,7 +79,7 @@ Access n8n via the server's allocated port after it starts.
 
 ### SQL Server 2022
 
-Leave the Startup Command as default (`/entrypoint.sh`). Just fill in the variables below:
+Just fill in the variables below:
 
 | Variable | Default | Description |
 |----------|---------|-------------|
